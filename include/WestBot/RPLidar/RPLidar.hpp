@@ -3,6 +3,8 @@
 #ifndef WESTBOT_RPLIDAR_RPLIDAR_HPP_
 #define WESTBOT_RPLIDAR_RPLIDAR_HPP_
 
+#include <memory>
+
 #include <QString>
 
 #include "Export.hpp"
@@ -53,7 +55,7 @@ public:
         bool& is4kmode );
 
 private:
-    RPLidarPrivate* _d;
+    std::unique_ptr< RPLidarPrivate > _d;
 };
 
 }
