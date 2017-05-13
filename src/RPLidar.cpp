@@ -11,6 +11,11 @@ RPLidar::RPLidar( const QString port, uint32_t baudrate )
 {
 }
 
+RPLidar::~RPLidar()
+{
+    delete _d;
+}
+
 bool RPLidar::connect()
 {
     return _d->connect();

@@ -3,8 +3,6 @@
 #ifndef WESTBOT_RPLIDAR_RPLIDAR_HPP_
 #define WESTBOT_RPLIDAR_RPLIDAR_HPP_
 
-#include <memory>
-
 #include <QString>
 
 #include "Export.hpp"
@@ -23,6 +21,7 @@ class WESTBOT_RPLIDAR_EXPORT RPLidar
 {
 public:
     RPLidar( const QString port = QString(), uint32_t baudrate = 115200 );
+    ~RPLidar();
 
     bool connect();
     void disconnect();
@@ -55,7 +54,7 @@ public:
         bool& is4kmode );
 
 private:
-    std::unique_ptr< RPLidarPrivate > _d;
+    RPLidarPrivate* _d;
 };
 
 }
