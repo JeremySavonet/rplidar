@@ -104,3 +104,19 @@ bool RPLidar::getFrequency(
 {
     return _d->getFrequency( inExpressMode, count, frequency, is4kmode );
 }
+
+bool RPLidar::grabScanData(
+    measurementNode_t* nodeBuffer,
+    size_t & count,
+    uint32_t timeout )
+{
+    return _d->grabScanData( nodeBuffer, count, timeout );
+}
+
+bool RPLidar::ascendScanData(
+    measurementNode_t* nodeBuffer,
+    size_t count )
+{
+    return _d->ascendScanData( nodeBuffer, count );
+}
+

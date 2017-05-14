@@ -11,14 +11,21 @@ namespace
 {
     QString deviceInfoToString( rplidar_response_device_info_t deviceInfo )
     {
-        Q_UNUSED( deviceInfo );
-        return QString();
+        QString info =
+            QString( "Model: %1 Firmware version: %2 Hardware version: %3 Serial number: %4" )
+                .arg( deviceInfo.model )
+                .arg( deviceInfo.firmware_version )
+                .arg( deviceInfo.hardware_version )
+                .arg( QString::fromUtf16( ( ushort* )( deviceInfo.serialnum ) ) );
+        return info;
     }
 
     QString rateInfoToString( rplidar_response_sample_rate_t rateInfo )
     {
-        Q_UNUSED( rateInfo );
-        return QString();
+        QString rate = QString( "Sample duration: %1us Express sample duration: %2us" )
+            .arg( rateInfo.std_sample_duration_us )
+            .arg( rateInfo.express_sample_duration_us );
+        return rate;
     }
 }
 
@@ -232,6 +239,51 @@ bool RPLidarPrivate::getFrequency(
     {
         return false;
     }
+
+    return true;
+}
+
+bool RPLidarPrivate::grabScanData(
+    measurementNode_t* nodeBuffer,
+    size_t & count,
+    uint32_t timeout )
+{
+    u_result operationResult;
+    rplidar_response_measurement_node_t* buffer;
+
+    operationResult = _lidarDriver->grabScanData( buffer, count, timeout );
+
+    if( IS_FAIL( operationResult ) )
+    {
+        qWarning() << "Error, cannot grab scan data";
+        return false;
+    }
+
+    nodeBuffer->sync_quality = buffer->sync_quality;
+    nodeBuffer->angle_q6_checkbit = buffer->angle_q6_checkbit;
+    nodeBuffer->distance_q2 = buffer->distance_q2;
+
+    return true;
+}
+
+bool RPLidarPrivate::ascendScanData(
+    measurementNode_t* nodeBuffer,
+    size_t count )
+{
+    u_result operationResult;
+    rplidar_response_measurement_node_t* buffer;
+
+    operationResult = _lidarDriver->ascendScanData( buffer, count );
+
+    if( IS_FAIL( operationResult ) )
+    {
+        qWarning() << "Error, cannot ascend scan data";
+        return false;
+    }
+
+    nodeBuffer->sync_quality = buffer->sync_quality;
+    nodeBuffer->angle_q6_checkbit = buffer->angle_q6_checkbit;
+    nodeBuffer->distance_q2 = buffer->distance_q2;
 
     return true;
 }

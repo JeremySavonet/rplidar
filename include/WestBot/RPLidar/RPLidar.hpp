@@ -15,6 +15,13 @@ namespace
 namespace WestBot {
 namespace RPLidar {
 
+typedef struct WESTBOT_RPLIDAR_EXPORT measurementNode
+{
+    uint8_t    sync_quality;      // syncbit:1;syncbit_inverse:1;quality:6;
+    uint16_t   angle_q6_checkbit; // check_bit:1;angle_q6:15;
+    uint16_t   distance_q2;
+} __attribute__((packed)) measurementNode_t;
+
 class RPLidarPrivate;
 
 class WESTBOT_RPLIDAR_EXPORT RPLidar
@@ -52,6 +59,15 @@ public:
         size_t count,
         float& frequency,
         bool& is4kmode );
+
+    bool grabScanData(
+        measurementNode_t* nodeBuffer,
+        size_t& count,
+        uint32_t timeout = DEFAULT_TIMEOUT );
+
+    bool ascendScanData(
+        measurementNode_t* nodeBuffer,
+        size_t count );
 
 private:
     RPLidarPrivate* _d;

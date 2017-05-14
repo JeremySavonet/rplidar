@@ -7,6 +7,8 @@
 
 #include <3rdparty/rplidar_sdk/include/rplidar.h>
 
+#include "../RPLidar.hpp"
+
 namespace WestBot {
 namespace RPLidar {
 
@@ -45,6 +47,15 @@ public:
         size_t count,
         float& frequency,
         bool& is4kmode );
+
+    bool grabScanData(
+        measurementNode_t* nodeBuffer,
+        size_t & count,
+        uint32_t timeout );
+
+    bool ascendScanData(
+        measurementNode_t* nodeBuffer,
+        size_t count );
 
 private:
     QString _port;
