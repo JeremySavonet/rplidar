@@ -119,4 +119,3 @@ bool RPLidar::ascendScanData(
 {
     return _d->ascendScanData( nodeBuffer, count );
 }
-

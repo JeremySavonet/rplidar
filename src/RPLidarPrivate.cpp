@@ -68,42 +68,22 @@ bool RPLidarPrivate::isConnected()
 
 bool RPLidarPrivate::reset( uint32_t timeout )
 {
-    if( IS_FAIL( _lidarDriver->reset( timeout) ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->reset( timeout ) );
 }
 
 bool RPLidarPrivate::setMotorPwm( uint16_t pwm )
 {
-    if( IS_FAIL( _lidarDriver->setMotorPWM( pwm ) ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->setMotorPWM( pwm ) );
 }
 
 bool RPLidarPrivate::startMotor()
 {
-    if( IS_FAIL( _lidarDriver->startMotor() ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->startMotor() );
 }
 
 bool RPLidarPrivate::stopMotor()
 {
-    if( IS_FAIL( _lidarDriver->stopMotor() ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->stopMotor() );
 }
 
 bool RPLidarPrivate::checkMotorCtrlSupport( uint32_t timeout )
@@ -121,42 +101,22 @@ bool RPLidarPrivate::checkMotorCtrlSupport( uint32_t timeout )
 
 bool RPLidarPrivate::startScan( bool force , bool autoExpressMode )
 {
-    if( IS_FAIL( _lidarDriver->startScan( force, autoExpressMode ) ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->startScan( force, autoExpressMode ) );
 }
 
 bool RPLidarPrivate::startScanNormal( bool force, uint32_t timeout )
 {
-    if( IS_FAIL( _lidarDriver->startScanNormal( force, timeout ) ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->startScanNormal( force, timeout ) );
 }
 
 bool RPLidarPrivate::startScanExpress( bool fixedAngle, uint32_t timeout )
 {
-    if( IS_FAIL( _lidarDriver->startScanExpress( fixedAngle, timeout ) ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->startScanExpress( fixedAngle, timeout ) );
 }
 
 bool RPLidarPrivate::stopScan( uint32_t timeout )
 {
-    if( IS_FAIL( _lidarDriver->stop( timeout ) ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->stop( timeout ) );
 }
 
 bool RPLidarPrivate::checkExpressScanSupported( uint32_t timeout )
@@ -234,13 +194,11 @@ bool RPLidarPrivate::getFrequency(
     float& frequency,
     bool& is4kmode )
 {
-    if( IS_FAIL( _lidarDriver->getFrequency(
-            inExpressMode, count, frequency, is4kmode ) ) )
-    {
-        return false;
-    }
-
-    return true;
+    return IS_FAIL( _lidarDriver->getFrequency(
+        inExpressMode,
+        count,
+        frequency,
+        is4kmode ) );
 }
 
 bool RPLidarPrivate::grabScanData(
