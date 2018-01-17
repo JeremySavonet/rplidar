@@ -27,7 +27,7 @@ class RPLidarPrivate;
 class WESTBOT_RPLIDAR_EXPORT RPLidar
 {
 public:
-    RPLidar( const QString port = QString(), uint32_t baudrate = 115200 );
+    RPLidar( const QString& port, uint32_t baudrate = 115200 );
     ~RPLidar();
 
     bool connect();
@@ -65,9 +65,7 @@ public:
         size_t& count,
         uint32_t timeout = DEFAULT_TIMEOUT );
 
-    bool ascendScanData(
-        measurementNode_t* nodeBuffer,
-        size_t count );
+    bool ascendScanData( measurementNode_t* nodeBuffer, size_t count );
 
 private:
     RPLidarPrivate* _d;

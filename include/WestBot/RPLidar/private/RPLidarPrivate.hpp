@@ -15,9 +15,7 @@ namespace RPLidar {
 class RPLidarPrivate
 {
 public:
-    RPLidarPrivate(
-        const QString port = QString(),
-        uint32_t baudrate = 115200 );
+    RPLidarPrivate( const QString& port, uint32_t baudrate = 115200 );
     ~RPLidarPrivate();
 
     bool connect();
@@ -53,12 +51,10 @@ public:
         size_t & count,
         uint32_t timeout );
 
-    bool ascendScanData(
-        measurementNode_t* nodeBuffer,
-        size_t count );
+    bool ascendScanData( measurementNode_t* nodeBuffer, size_t count );
 
 private:
-    QString _port;
+    const QString _port;
     uint32_t _baudrate;
     rp::standalone::rplidar::RPlidarDriver* _lidarDriver;
 };

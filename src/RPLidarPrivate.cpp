@@ -22,14 +22,15 @@ namespace
 
     QString rateInfoToString( rplidar_response_sample_rate_t rateInfo )
     {
-        QString rate = QString( "Sample duration: %1us Express sample duration: %2us" )
-            .arg( rateInfo.std_sample_duration_us )
-            .arg( rateInfo.express_sample_duration_us );
+        QString rate = 
+            QString( "Sample duration: %1us Express sample duration: %2us" )
+                .arg( rateInfo.std_sample_duration_us )
+                .arg( rateInfo.express_sample_duration_us );
         return rate;
     }
 }
 
-RPLidarPrivate::RPLidarPrivate( const QString port, uint32_t baudrate )
+RPLidarPrivate::RPLidarPrivate( const QString& port, uint32_t baudrate )
     : _port( port )
     , _baudrate( baudrate )
     , _lidarDriver( RPlidarDriver::CreateDriver(

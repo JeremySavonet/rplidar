@@ -6,7 +6,7 @@
 
 using namespace WestBot::RPLidar;
 
-RPLidar::RPLidar( const QString port, uint32_t baudrate )
+RPLidar::RPLidar( const QString& port, uint32_t baudrate )
     : _d( new RPLidarPrivate( port, baudrate ) )
 {
 }
@@ -113,9 +113,7 @@ bool RPLidar::grabScanData(
     return _d->grabScanData( nodeBuffer, count, timeout );
 }
 
-bool RPLidar::ascendScanData(
-    measurementNode_t* nodeBuffer,
-    size_t count )
+bool RPLidar::ascendScanData( measurementNode_t* nodeBuffer, size_t count )
 {
     return _d->ascendScanData( nodeBuffer, count );
 }
